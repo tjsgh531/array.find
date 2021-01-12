@@ -4,31 +4,18 @@ const userDataList = [
     { id: 1021, name: '사자' },
     { id: 6021, name: '여우' }
   ];
-  
-  /** 검색 ID 입력창  */
-  const searchIdInput = document.querySelector('#search-id-input');
-  
-  /** 검색 결과 표시창  */
-  const searchResult = document.querySelector('#search-result');
-  
-  // 문자가 입력될 때마다 내용 체크
-  searchIdInput.addEventListener('keyup', () => {
-    // 검색 ID 가져오기
-    const searchId = Number(event.target.value);
-    findUser(searchId);
-  });
-  
-  /*** 유저 검색  */
-  function findUser(searchId) {
-    // 해당 데이터 가져오기
-    const targetData = userDataList.find((data) => data.id === searchId);
-  
-    // 해당 데이터가 없으면 ‘유저 검색 결과 없음’ 표시 후 종료
-    if (targetData == null) {
-      searchResult.textContent = '유저 검색 결과 없음';
-      return;
-    }
-  
-    // 검색 결과의 이름을 표시
-    searchResult.textContent = targetData.name;
+  const input = document.getElementById('input_value');
+  input.addEventListener('input',findUser);
+
+
+function findUser(){
+  const inputValue =Number(input.value);
+  const result = document.getElementById('result');
+
+  const findName = userDataList.find((data) => data.id === inputValue);
+  if(findName == null){
+    result.textContent='일치하는 아이디가 없습니다.';
+    return;
   }
+  result.textContent = findName.name;
+}
